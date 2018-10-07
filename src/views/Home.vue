@@ -1,18 +1,53 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="home">
+    <h1>서비스 목록</h1>
+    <table id="services">
+      <tbody>
+        <tr>
+          <td>
+            <router-link :to="{ name: 'service-apikey' }">
+              <div><i class="material-icons">vpn_key</i></div>
+              <div class="service-name">API Key</div>
+            </router-link>
+          </td>
+          <td>
+            <router-link :to="{ name: 'service-keyvalue' }">
+              <div><i class="material-icons">storage</i></div>
+              <div class="service-name">Key Value</div>
+            </router-link>
+          </td>
+          <td>
+            <div><i class="material-icons">file_copy</i></div>
+            <div class="service-name">Storage</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+<style lang="scss" scoped>
+#home {
+  table#services {
+    width: 100%;
+    table-layout: fixed;
+    text-align: center;
 
-export default {
-  name: 'home',
-  components: {
-    HelloWorld,
-  },
-};
-</script>
+    tr td {
+      padding: 10px 0;
+
+      i.material-icons {
+        font-size: 36px;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      &:hover {
+        background-color: #424242;
+      }
+    }
+  }
+}
+</style>

@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "lynlab-luppiter"
+  },
+  "targets": {
+    "lynlab-project": {
+      "hosting": {
+        "luppiter": [
+          "lynlab-luppiter"
+        ]
+      }
+    }
+  }
+}

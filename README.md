@@ -1,21 +1,18 @@
-# luppiter-web
+# Luppiter Web
 
-## Project setup
+> Web console for LYnLab Luppiter services.  
+> For further information, see documentations on [LYnLab Luppiter console](https://luppiter.lynlab.co.kr/web).
+
+## Development
+
 ```
 yarn install
+yarn serve
 ```
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+## Deployment
 
-### Compiles and minifies for production
 ```
-yarn run build
-```
-
-### Lints and fixes files
-```
-yarn run lint
+yarn build
+yarn deploy
 ```
