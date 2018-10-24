@@ -44,7 +44,7 @@ export default {
         return;
       }
 
-      mutation(`createUser(username:"${this.input.username}",password:"${this.input.password}",email:"${this.input.email}",redirection_url:"https://luppiter.lynlab.co.kr/web/login"){uuid}`)
+      mutation(`createUser(UserInput:{username:"${this.input.username}",password:"${this.input.password}",email:"${this.input.email}"}){uuid}`)
         .then(() => this.$router.push({ name: 'login' }))
         .catch(() => { this.error = '가입에 실패했습니다. 이미 가입된 계정은 아닌지 확인해주세요.'; });
     },

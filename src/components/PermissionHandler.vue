@@ -1,6 +1,6 @@
 <template>
   <div class="permission-handler">
-    <SelectBox id="key-select" placeholder="API Key 선택" v-on:select="onSelect" v-bind:options="apiKeys.map(key => key.key)"/>
+    <SelectBox id="key-select" placeholder="API Key 선택" v-on:select="onSelect" v-bind:options="apiKeys.map(key => { return {key: key.key, text: `${key.key.slice(0, 8)} (${key.comment})`} })"/>
     <div class="toggle-wrapper" v-if="selectedAPIKey">
       <ToggleSwitch v-for="key in apiKeys" v-if="key.key === selectedAPIKey.key" v-bind:key="key.key" :initial-state="hasPermission" v-on:on="addPermission" />
     </div>
@@ -36,7 +36,7 @@ export default {
     },
   },
   created() {
-    query('apiKeyList{key,permissions}', this.$localStorage.get('access_token'))
+    query('apiKeyList{key,comment,permissions}', this.$localStorage.get('access_token'))
       .then((data) => { this.apiKeys = data.apiKeyList; });
   },
 };

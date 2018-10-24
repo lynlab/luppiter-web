@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     login() {
-      mutation(`createAccessToken(username:"${this.input.username}",password:"${this.input.password}"){token,valid_until}`)
+      mutation(`createAccessToken(LoginInput:{username:"${this.input.username}",password:"${this.input.password}"}){token}`)
         .then((data) => {
           this.$localStorage.set('access_token', data.createAccessToken.token);
           this.redirect();

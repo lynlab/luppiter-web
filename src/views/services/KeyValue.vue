@@ -7,3 +7,13 @@
     <PermissionHandler v-bind:service="'KeyValue'"/>
   </div>
 </template>
+
+<script>
+export default {
+  created() {
+    if (!this.$localStorage.get('access_token')) {
+      this.$router.push({ name: 'login' });
+    }
+  },
+};
+</script>

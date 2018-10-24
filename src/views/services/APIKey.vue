@@ -42,6 +42,10 @@ export default {
     },
   },
   created() {
+    if (!this.$localStorage.get('access_token')) {
+      this.$router.push({ name: 'login' });
+    }
+
     query('apiKeyList{key,comment,created_at}', this.$localStorage.get('access_token'))
       .then((data) => { this.apiKeys = data.apiKeyList; });
   },

@@ -5,8 +5,8 @@
       <p class="arrow"><i class="material-icons">{{ optionsOpened ? 'arrow_drop_up' : 'arrow_drop_down' }}</i></p>
     </div>
     <div :class="['options', optionsOpened ? 'active' : '' ]">
-      <div class="option" v-for="option in options" v-bind:key="option" @click="select(option)">
-        <p>{{ option }}</p>
+      <div class="option" v-for="option in options" v-bind:key="option.key" @click="select(option.key)">
+        <p>{{ option.text }}</p>
       </div>
     </div>
   </div>

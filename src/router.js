@@ -5,6 +5,7 @@ import Home from './views/Home.vue';
 import Login from './views/auth/Login.vue';
 import Logout from './views/auth/Logout.vue';
 import Register from './views/auth/Register.vue';
+import Activate from './views/auth/Activate.vue';
 import Reference from './views/Reference.vue';
 
 import APIKeyService from './views/services/APIKey.vue';
@@ -42,6 +43,11 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: Register,
+    },
+    {
+      path: '/activate',
+      name: 'activate',
+      component: Activate,
     },
 
     // Services
