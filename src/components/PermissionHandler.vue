@@ -24,6 +24,8 @@ export default {
     onSelect(selectedKey) {
       this.selectedAPIKey = this.apiKeys.find(key => key.key === selectedKey);
       this.hasPermission = (this.selectedAPIKey.permissions.find(p => p.startsWith(`${this.service}::`)) !== undefined);
+
+      this.$emit('change', this.selectedAPIKey.key, this.hasPermission);
     },
     addPermission(turnedOn) {
       if (turnedOn) {
@@ -44,6 +46,8 @@ export default {
 
 <style lang="scss">
 .permission-handler {
+  height: 60px;
+
   .select-box {
     float: left;
     margin-bottom: 8px;

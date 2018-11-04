@@ -17,8 +17,10 @@
             </router-link>
           </td>
           <td>
-            <div><i class="material-icons">file_copy</i></div>
-            <div class="service-name">Storage</div>
+            <router-link :to="{ name: 'service-storage' }">
+              <div><i class="material-icons">file_copy</i></div>
+              <div class="service-name">Storage</div>
+            </router-link>
           </td>
         </tr>
       </tbody>

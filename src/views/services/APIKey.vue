@@ -1,7 +1,7 @@
 <template>
   <div id="service-apikey">
     <h1>API Key</h1>
-    <table>
+    <table class="themed">
       <tr>
         <th>API Key</th>
         <th>메모</th>
@@ -51,26 +51,3 @@ export default {
   },
 };
 </script>
-
-
-<style scoped lang="scss">
-#service-apikey {
-  table {
-    margin-bottom: 20px;
-    border: 1px solid #424242;
-    width: 100%;
-  }
-
-  tr {
-    height: 40px;
-  }
-
-  th {
-    border-bottom: 1px solid #424242;
-  }
-
-  td {
-    padding: 0 10px;
-  }
-}
-</style>

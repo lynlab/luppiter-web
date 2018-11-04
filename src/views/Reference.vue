@@ -8,7 +8,7 @@
     <h3>1. GET 방식</h3>
     <code>
       curl -H 'Authorization: Bearer YOUR_API_KEY' \<br/>
-      &nbsp;&nbsp;https://luppiter.lynlab.co.kr/graphql?query=query{keyValue(key:"foo"){key,value}}
+      &nbsp;&nbsp;https://luppiter.lynlab.co.kr/apis/graphql?query=query{keyValue(key:"foo"){key,value}}
     </code>
     <p>요청 주소는 어떠한 경우에도 변하지 않습니다. 모든 요청은 query 파라미터로 구분합니다.</p>
 
@@ -18,7 +18,7 @@
       &nbsp;&nbsp;-H 'Authorization: Bearer YOUR_API_KEY' \<br/>
       &nbsp;&nbsp;-H 'Content-Type: application/graphql' \<br/>
       &nbsp;&nbsp;-d 'query{keyValue(key:"foo"){key,value}}' \<br/>
-      &nbsp;&nbsp;https://luppiter.lynlab.co.kr/graphql
+      &nbsp;&nbsp;https://luppiter.lynlab.co.kr/apis/graphql
     </code>
     <p>
       POST 요청은 주소는 동일하지만, query 파라미터를 요청의 body에 싣어 보낸다는 점이 다릅니다.

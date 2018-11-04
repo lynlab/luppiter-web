@@ -44,6 +44,28 @@ body {
 
   code { font-size: 16px; }
 
+  table.themed {
+    margin-bottom: 20px;
+    border: 1px solid #424242;
+    width: 100%;
+
+    tr {
+    height: 40px;
+    }
+
+    th {
+      border-bottom: 1px solid #424242;
+    }
+
+    td {
+      padding: 0 10px;
+    }
+  }
+
+  .material-icons {
+    vertical-align: middle !important;
+  }
+
   .primary-input {
     height: 42px;
     margin-right: 8px;

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const apiEndpoint = 'https://luppiter.lynlab.co.kr/graphql';
+// const apiEndpoint = 'https://luppiter.lynlab.co.kr';
+const apiEndpoint = 'http://localhost:8081';
 
 function query(queryString, accessToken) {
   const configs = {
@@ -11,7 +12,7 @@ function query(queryString, accessToken) {
     configs.headers.Authorization = `Bearer ${accessToken}`;
   }
 
-  return axios.get(apiEndpoint, configs)
+  return axios.get(`${apiEndpoint}/private/graphql`, configs)
     .then((res) => {
       if (res.data.errors) {
         throw Error(res.data.errors[0].message);
@@ -28,7 +29,7 @@ function mutation(mutationString, accessToken) {
     configs.headers.Authorization = `Bearer ${accessToken}`;
   }
 
-  return axios.post(apiEndpoint, `mutation{${mutationString}}`, configs)
+  return axios.post(`${apiEndpoint}/private/graphql`, `mutation{${mutationString}}`, configs)
     .then((res) => {
       if (res.data.errors) {
         throw Error(res.data.errors[0].message);
@@ -37,4 +38,49 @@ function mutation(mutationString, accessToken) {
     });
 }
 
-export { query, mutation };
+function apiQuery(queryString, apiKey) {
+  const configs = {
+    params: { query: `query{${queryString}}` },
+    headers: { 'Content-Type': 'application/graphql' },
+  };
+  if (apiKey) {
+    configs.headers['X-Api-Key'] = apiKey;
+  }
+
+  return axios.get(`${apiEndpoint}/apis/graphql`, configs)
+    .then((res) => {
+      if (res.data.errors) {
+        throw Error(res.data.errors[0].message);
+      }
+      return res.data.data;
+    });
+}
+
+function apiMutation(mutationString, apiKey) {
+  const configs = {
+    headers: { 'Content-Type': 'application/graphql' },
+  };
+  if (apiKey) {
+    configs.headers['X-Api-Key'] = apiKey;
+  }
+
+  return axios.post(`${apiEndpoint}/apis/graphql`, `mutation{${mutationString}}`, configs)
+    .then((res) => {
+      if (res.data.errors) {
+        throw Error(res.data.errors[0].message);
+      }
+      return res.data.data;
+    });
+}
+
+function uploadFile(file, bucketName, fileName) {
+  const configs = {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  };
+
+  const formData = new FormData();
+  formData.set('item', file);
+  return axios.post(`${apiEndpoint}/files/${bucketName}/${fileName}`, formData, configs);
+}
+
+export { query, mutation, apiQuery, apiMutation, uploadFile };

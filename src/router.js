@@ -10,6 +10,8 @@ import Reference from './views/Reference.vue';
 
 import APIKeyService from './views/services/APIKey.vue';
 import KeyValueService from './views/services/KeyValue.vue';
+import StorageService from './views/services/Storage.vue';
+import StorageUploadService from './views/services/StorageUpload.vue';
 
 Vue.use(Router);
 
@@ -55,6 +57,16 @@ export default new Router({
       path: '/services/api_key',
       name: 'service-apikey',
       component: APIKeyService,
+    },
+    {
+      path: '/services/storage',
+      name: 'service-storage',
+      component: StorageService,
+    },
+    {
+      path: '/services/storage/upload',
+      name: 'service-storage-upload',
+      component: StorageUploadService,
     },
     {
       path: '/services/key_value',
