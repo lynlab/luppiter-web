@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // const apiEndpoint = 'https://luppiter.lynlab.co.kr';
-const apiEndpoint = 'http://localhost:8081';
+const apiEndpoint = 'http://localhost:1323';
 
 function query(queryString, accessToken) {
   const configs = {
@@ -12,7 +12,7 @@ function query(queryString, accessToken) {
     configs.headers.Authorization = `Bearer ${accessToken}`;
   }
 
-  return axios.get(`${apiEndpoint}/private/graphql`, configs)
+  return axios.get(`${apiEndpoint}/apis/graphql`, configs)
     .then((res) => {
       if (res.data.errors) {
         throw Error(res.data.errors[0].message);
@@ -29,7 +29,7 @@ function mutation(mutationString, accessToken) {
     configs.headers.Authorization = `Bearer ${accessToken}`;
   }
 
-  return axios.post(`${apiEndpoint}/private/graphql`, `mutation{${mutationString}}`, configs)
+  return axios.post(`${apiEndpoint}/apis/graphql`, `mutation{${mutationString}}`, configs)
     .then((res) => {
       if (res.data.errors) {
         throw Error(res.data.errors[0].message);

@@ -7,8 +7,10 @@
         <router-link :to="{ name: 'reference' }"><li>도움말</li></router-link>
       </ul>
       <ul class="right">
-        <router-link :to="{ name: 'login' }" v-if="$localStorage.get('access_token') == null"><button class="square-button" type="button">LOGIN</button></router-link>
-        <router-link :to="{ name: 'logout' }" v-else><button class="square-button" type="button">LOGOUT</button></router-link>
+        <a href="https://auth.lynlab.co.kr/web/signin?redirect_url=https://luppiter.lynlab.co.kr/callbacks/auth" v-if="$localStorage.get('auth.access_token') == null">
+          <button class="square-button" type="button">LOGIN</button>
+        </a>
+        <button class="square-button" type="button" v-on:click="$localStorage.set('auth.access_token', null)" v-else>LOGOUT</button>
       </ul>
     </div>
     <div id="content">
@@ -21,7 +23,6 @@
 html {
   background-color: #212121;
   height: 100%;
-  overflow: scroll;
 }
 
 body {
