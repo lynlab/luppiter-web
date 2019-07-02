@@ -1,12 +1,16 @@
-<template>
+  <template>
   <nav>
-    <div class="item" @click="onClickSignIn()" v-if="!isSignedIn">
+    <div class="item" @click="onClickSignIn()" v-if="!$store.state.accessToken">
       <ion-icon class="icon" name="lock"></ion-icon>
       <p class="description">로그인</p>
     </div>
     <div class="item" @click="onClickSignOut()" v-else>
       <ion-icon class="icon" name="lock"></ion-icon>
       <p class="description">로그아웃</p>
+    </div>
+    <div class="item" @click="$emit('menu', 'api-key')" v-if="$store.state.accessToken">
+      <ion-icon class="icon" name="key"></ion-icon>
+      <p class="description">{{ $store.state.apiKey ? $store.state.apiKey.slice(0, 8) : 'API Keys' }}</p>
     </div>
   </nav>
 </template>
@@ -23,11 +27,18 @@ export default {
       this.$router.push({ name: 'auth' });
     },
     onClickSignOut() {
-      this.$localStorage.remove('auth.accessToken', null);
-      this.$localStorage.remove('auth.refreshToken', null);
-      this.$localStorage.remove('auth.expireAt', null);
+      this.$localStorage.remove('auth.accessToken');
+      this.$localStorage.remove('auth.refreshToken');
+      this.$localStorage.remove('auth.expireAt');
+      this.$store.commit('unsetAccessToken');
+
+      this.$localStorage.remove('luppiter.apiKey');
+      this.$store.commit('unsetApiKey');
 
       this.isSignedIn = false;
+
+      this.$emit('signout');
+      this.$notify({ group: 'luppiter', title: '로그아웃에 성공했습니다. 또 만나요!', type: 'success' });
     },
   },
 };
@@ -50,7 +61,7 @@ nav {
 
     &:hover {
       cursor: pointer;
-      color: $color-text-focus;
+      color: $color-text-dimmed;
     }
 
     ion-icon.icon {
@@ -61,6 +72,12 @@ nav {
       margin: 0;
       font-size: 12px;
     }
+  }
+
+  hr {
+    margin: 5px 10px;
+    border: 0;
+    border-top: solid $color-border 1px;
   }
 }
 </style>

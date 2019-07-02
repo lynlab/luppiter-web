@@ -1,9 +1,11 @@
 import Vue from 'vue';
+import VueLocalstorage from 'vue-localstorage';
+import VueMoment from 'vue-moment';
+import VueNotifiaction from 'vue-notification';
+
 import App from './App.vue';
 import router from './router';
 import store from './store';
-
-import VueLocalstorage from 'vue-localstorage';
 
 Vue.config.productionTip = false;
 Vue.config.ignoredElements = [
@@ -11,6 +13,8 @@ Vue.config.ignoredElements = [
 ];
 
 Vue.use(VueLocalstorage);
+Vue.use(VueMoment);
+Vue.use(VueNotifiaction);
 
 new Vue({
   router,

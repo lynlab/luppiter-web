@@ -15,6 +15,8 @@ export default {
       this.$localStorage.set('auth.refreshToken', this.$route.query.refreshToken);
       this.$localStorage.set('auth.expireAt', this.$route.query.expireAt);
 
+      this.$store.commit('setAccessToken', this.$route.query.accessToken);
+
       this.$router.push({ name: 'index' });
     }
   },
