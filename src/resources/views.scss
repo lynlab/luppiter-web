@@ -1,0 +1,63 @@
+.list-view {
+  .item {
+    padding: 10px;
+    background-color: $color-background;
+    border: 1px solid $color-border;
+    
+    p {
+      margin: 0;
+    }
+
+    &:hover {
+      background-color: $color-background-dimmed;
+    }
+
+    &:first-of-type {
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+
+    &:last-of-type {
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+  }
+}
+
+span.tag {
+  margin: 0 2px;
+  padding: 0 4px;
+  border-radius: 4px;
+  background-color: $color-button-general;
+  font-size: $font-size-small;
+}
+
+.form {
+  input {
+    width: 100%;
+    height: 32px;
+    border: 0;
+    padding: 0 12px;
+    font-size: $font-size-small;
+  }
+
+  label {
+    font-size: $font-size-tiny;
+  }
+
+  .actions {
+    text-align: center;
+    padding-top: 20px;
+
+    .action {
+      margin: 0 2px;
+      padding: 5px 20px;
+      border: 0;
+      font-size: $font-size-small;
+      background-color: $color-button-primary;
+      color: $color-text;
+
+      &:hover { background-color: $color-button-primary-dimmed; }
+    }
+  }
+}

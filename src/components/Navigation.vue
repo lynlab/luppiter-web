@@ -12,6 +12,15 @@
       <ion-icon class="icon" name="key"></ion-icon>
       <p class="description">{{ $store.state.apiKey ? $store.state.apiKey.slice(0, 8) : 'API Keys' }}</p>
     </div>
+
+    <template v-if="$store.state.accessToken">
+      <hr>
+
+      <div class="item" @click="$emit('menu', 'storage')">
+        <ion-icon class="icon" name="filing"></ion-icon>
+        <p class="description">Storage</p>
+      </div>
+    </template>
   </nav>
 </template>
 
