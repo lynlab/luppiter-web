@@ -16,6 +16,7 @@
 
     <div :class="['modal', modal.isActive ? 'active' : '']">
       <div class="content">
+        <ion-icon class="close-btn" name="close" @click="modal.isActive = false"></ion-icon>
         <h2>새로운 API 키 발급</h2>
         <div class="form">
           <input type="text" placeholder="키 메모" v-model="modal.input.memo">
@@ -174,6 +175,14 @@ export default {
   height: 100%;
   background-color: $color-dim;
   &.active { visibility: initial; }
+
+  .close-btn {
+    float: right;
+    margin-right: -5px;
+    font-size: 20px;
+
+    &:hover { cursor: pointer; }
+  }
 
   .content {
     background-color: $color-panel;

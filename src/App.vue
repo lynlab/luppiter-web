@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <navigation @menu="onMenu" @signout="onSignOut()" />
-    <router-view :panels="panels" />
+    <panels :panels="panels" @destroy="onDestroy" />
 
     <notifications group="luppiter" />
   </div>
@@ -9,10 +9,12 @@
 
 <script>
 import Navigation from './components/Navigation.vue';
+import Panels from './components/Panels.vue';
 
 export default {
   components: {
     navigation: Navigation,
+    panels: Panels,
   },
   data() {
     return {
@@ -28,6 +30,9 @@ export default {
     },
     onSignOut() {
       this.panels = [];
+    },
+    onDestroy(panel) {
+      this.panels = this.panels.filter(p => p.name !== panel.name);
     },
   },
   created() {
