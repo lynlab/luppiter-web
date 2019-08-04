@@ -127,26 +127,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.bucket {
-  .actions {
-    padding: 10px 0;
-    font-size: $font-size-small;
-
-    .action {
-      padding: 2px 10px;
-      background-color: $color-button-primary;
-
-      &:hover {
-        cursor: pointer;
-        background-color: $color-button-primary-dimmed;
-      }
-
-      &:not(last-of-type) {
-        margin-right: 4px;
-      }
-    }
-  }
-}
-</style>

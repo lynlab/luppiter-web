@@ -20,6 +20,13 @@
         <ion-icon class="icon" name="filing"></ion-icon>
         <p class="description">Storage</p>
       </div>
+
+      <hr>
+
+      <div class="item" @click="$emit('menu', 'cloudcontainer')">
+        <ion-icon class="icon" name="cube"></ion-icon>
+        <p class="description">Container</p>
+      </div>
     </template>
   </nav>
 </template>

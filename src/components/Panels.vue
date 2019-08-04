@@ -5,6 +5,7 @@
 
       <panel-api-key v-if="panel.name === 'api-key'" />
       <panel-storage v-if="panel.name === 'storage'" />
+      <panel-cloudcontainer v-if="panel.name === 'cloudcontainer'" />
     </div>
 
     <router-view />
@@ -14,12 +15,14 @@
 <script>
 import ApiKeyPanel from '../views/panels/ApiKey.vue';
 import StoragePanel from '../views/panels/Storage.vue';
+import CloudContainerPanel from '../views/panels/CloudContainer.vue';
 
 export default {
   name: 'index',
   components: {
     'panel-api-key': ApiKeyPanel,
     'panel-storage': StoragePanel,
+    'panel-cloudcontainer': CloudContainerPanel,
   },
   props: {
     panels: Array,
