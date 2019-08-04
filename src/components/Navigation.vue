@@ -1,11 +1,11 @@
   <template>
   <nav>
     <div class="item" @click="onClickSignIn()" v-if="!$store.state.accessToken">
-      <ion-icon class="icon" name="lock"></ion-icon>
+      <ion-icon class="icon" name="contact"></ion-icon>
       <p class="description">로그인</p>
     </div>
     <div class="item" @click="onClickSignOut()" v-else>
-      <ion-icon class="icon" name="lock"></ion-icon>
+      <ion-icon class="icon" name="contact"></ion-icon>
       <p class="description">로그아웃</p>
     </div>
     <div class="item" @click="$emit('menu', 'api-key')" v-if="$store.state.accessToken">
@@ -19,6 +19,13 @@
       <div class="item" @click="$emit('menu', 'storage')">
         <ion-icon class="icon" name="filing"></ion-icon>
         <p class="description">Storage</p>
+      </div>
+
+      <hr>
+
+      <div class="item" @click="$emit('menu', 'certs')">
+        <ion-icon class="icon" name="lock"></ion-icon>
+        <p class="description">Certs</p>
       </div>
 
       <hr>

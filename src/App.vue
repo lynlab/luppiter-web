@@ -69,6 +69,13 @@ h1, h2 {
   margin-top: 0;
 }
 
+a {
+  color: $color-text-link;
+  text-decoration: none;
+
+  &:hover { text-decoration: underline; }
+}
+
 #app {
   font-family: 'Spoqa Han Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
