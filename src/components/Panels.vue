@@ -1,5 +1,5 @@
 <template>
-  <div class="index">
+  <div id="panels">
     <div class="panel" v-for="panel in panels" v-bind:key="panel.name">
       <ion-icon class="close-btn" name="close" @click="$emit('destroy', panel)"></ion-icon>
 
@@ -28,16 +28,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.index {
-  overflow-y: scroll;
-  width: calc(100% - 80px);
+#panels {
+  width: 100%;
+  display: flex;
+  overflow-x: scroll;
 
   .panel {
-    margin: 10px auto;
+    margin: 10px 5px;
     padding: 30px;
-    max-width: 1000px;
+    width: 480px;
+    min-width: 400px;
     background-color: $color-panel;
     border: $color-border solid 1px;
+
+    &:first-of-type { margin-left: 10px; }
 
     .close-btn {
       float: right;

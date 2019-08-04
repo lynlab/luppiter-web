@@ -81,6 +81,10 @@ h1, h2 {
   color: $color-text;
 }
 
+#panels {
+  width: calc(100vw - 80px);
+}
+
 .vue-notification {
   margin-top: 4px;
   margin-bottom: 0;
