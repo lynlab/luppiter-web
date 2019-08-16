@@ -30,6 +30,10 @@
 
       <hr>
 
+      <div class="item" @click="$emit('menu', 'hosting')">
+        <ion-icon class="icon" name="globe"></ion-icon>
+        <p class="description">Hosting</p>
+      </div>
       <div class="item" @click="$emit('menu', 'cloudcontainer')">
         <ion-icon class="icon" name="cube"></ion-icon>
         <p class="description">Container</p>

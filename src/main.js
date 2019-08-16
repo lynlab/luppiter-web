@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueLocalstorage from 'vue-localstorage';
 import VueMoment from 'vue-moment';
 import VueNotifiaction from 'vue-notification';
+import VueSelect from 'vue-select';
 
 import App from './App.vue';
 import router from './router';
@@ -19,6 +20,7 @@ Vue.use(VueMoment);
 Vue.use(VueNotifiaction);
 
 Vue.component('modal', Modal);
+Vue.component('v-select', VueSelect);
 
 new Vue({
   router,

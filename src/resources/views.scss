@@ -73,6 +73,18 @@ span.tag {
     font-size: $font-size-tiny;
   }
 
+  .checkbox {
+    width: 100%;
+
+    .label {
+      height: 12px;
+      margin: 15px 0;
+    
+      position: relative;
+      label { font-size: $font-size-small; }
+    }
+  }
+
   .actions {
     text-align: center;
     padding-top: 20px;
@@ -88,4 +100,10 @@ span.tag {
       &:hover { background-color: $color-button-primary-dimmed; }
     }
   }
+}
+
+.v-select {
+  margin-top: 5px;
+  background-color: $color-background;
+  span { color: $color-text; }
 }

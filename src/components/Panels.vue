@@ -6,6 +6,7 @@
       <panel-api-key v-if="panel.name === 'api-key'" />
       <panel-certs v-if="panel.name === 'certs'" />
       <panel-cloudcontainer v-if="panel.name === 'cloudcontainer'" />
+      <panel-hosting v-if="panel.name === 'hosting'" />
       <panel-storage v-if="panel.name === 'storage'" />
     </div>
 
@@ -15,9 +16,10 @@
 
 <script>
 import ApiKeyPanel from '../views/panels/ApiKey.vue';
-import StoragePanel from '../views/panels/Storage.vue';
 import CertsPanel from '../views/panels/Certs.vue';
 import CloudContainerPanel from '../views/panels/CloudContainer.vue';
+import HostingPanel from '../views/panels/Hosting.vue';
+import StoragePanel from '../views/panels/Storage.vue';
 
 export default {
   name: 'index',
@@ -25,6 +27,7 @@ export default {
     'panel-api-key': ApiKeyPanel,
     'panel-certs': CertsPanel,
     'panel-cloudcontainer': CloudContainerPanel,
+    'panel-hosting': HostingPanel,
     'panel-storage': StoragePanel,
   },
   props: {
@@ -43,7 +46,7 @@ export default {
     margin: 10px 5px;
     padding: 30px;
     width: 480px;
-    min-width: 400px;
+    min-width: 480px;
     background-color: $color-panel;
     border: $color-border solid 1px;
 

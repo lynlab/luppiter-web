@@ -69,6 +69,10 @@ h1, h2 {
   margin-top: 0;
 }
 
+h4 {
+  margin-bottom: 0px;
+}
+
 a {
   color: $color-text-link;
   text-decoration: none;
