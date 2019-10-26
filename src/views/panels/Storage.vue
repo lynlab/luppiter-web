@@ -6,13 +6,14 @@
     <div class="list-view">
       <div class="bucket item" v-for="bucket in buckets" v-bind:key="bucket.name">
         <p>
-          <strong>{{ bucket.name }}</strong> ({{ bucket.createdAt | moment('from') }})
+          <strong>{{ bucket.name }}</strong>&nbsp;<span class="dimmed">{{ bucket.createdAt | moment('from') }}</span>
           <span class="tag" v-if="bucket.isPublic"><ion-icon name="unlock"></ion-icon> 공개</span>
           <span class="tag" v-else><ion-icon name="lock"></ion-icon> 비공개</span>
         </p>
         <p class="actions">
-          <span class="action" @click="deleteBucket(bucket)">삭제</span>
+          <span class="action" @click="$store.commit('addPanel', { name: 'storage-explorer', payload: { bucketName: bucket.name } })">파일 목록</span>
           <span class="action" @click="modal.updateBucket.input.bucket = bucket; modal.updateBucket.isActive = true" v-if="!bucket.isPublic">공개로 전환</span>
+          <span class="action" @click="deleteBucket(bucket)">삭제</span>
         </p>
       </div>
       <div class="item" @click="modal.createBucket.isActive = true">

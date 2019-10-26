@@ -1,16 +1,15 @@
 <template>
   <div id="panels">
-    <div class="panel" v-for="panel in panels" v-bind:key="panel">
-      <ion-icon class="close-btn" name="close" @click="$store.commit('removePanel', panel)"></ion-icon>
+    <div class="panel" v-for="panel in panels" v-bind:key="panel.name">
+      <ion-icon class="close-btn" name="close" @click="$store.commit('removePanel', panel.name)"></ion-icon>
 
-      <panel-api-key v-if="panel === 'api-key'" />
-      <panel-certs v-if="panel === 'certs'" />
-      <panel-cloudcontainer v-if="panel === 'cloudcontainer'" />
-      <panel-hosting v-if="panel === 'hosting'" />
-      <panel-storage v-if="panel === 'storage'" />
+      <panel-api-key v-if="panel.name === 'api-key'" />
+      <panel-certs v-if="panel.name === 'certs'" />
+      <panel-cloudcontainer v-if="panel.name === 'cloudcontainer'" />
+      <panel-hosting v-if="panel.name === 'hosting'" />
+      <panel-storage v-if="panel.name === 'storage'" />
+      <panel-storage-explorer v-if="panel.name === 'storage-explorer'" :bucketName="panel.payload.bucketName" />
     </div>
-
-    <router-view />
   </div>
 </template>
 
@@ -20,6 +19,7 @@ import CertsPanel from '../views/panels/Certs.vue';
 import CloudContainerPanel from '../views/panels/CloudContainer.vue';
 import HostingPanel from '../views/panels/Hosting.vue';
 import StoragePanel from '../views/panels/Storage.vue';
+import StorageExplorerPanel from '../views/panels/StorageExplorer.vue';
 
 export default {
   name: 'index',
@@ -34,6 +34,7 @@ export default {
     'panel-cloudcontainer': CloudContainerPanel,
     'panel-hosting': HostingPanel,
     'panel-storage': StoragePanel,
+    'panel-storage-explorer': StorageExplorerPanel,
   },
 };
 </script>
@@ -51,6 +52,11 @@ export default {
     min-width: 480px;
     background-color: $color-panel;
     border: $color-border solid 1px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar { display: none; }
 
     &:first-of-type { margin-left: 10px; }
 

@@ -25,13 +25,13 @@ export default new Vuex.Store({
     unsetAccessToken(state) {
       state.accessToken = null;
     },
-    addPanel(state, key) {
-      if (state.panels.findIndex(k => k === key) === -1) {
-        state.panels.push(key);
+    addPanel(state, { name, payload }) {
+      if (state.panels.findIndex(panel => panel.name === name) === -1) {
+        state.panels.push({ name, payload });
       }
     },
-    removePanel(state, key) {
-      state.panels = state.panels.filter(k => k !== key);
+    removePanel(state, name) {
+      state.panels = state.panels.filter(panel => panel.name !== name);
     },
     removeAllPanels(state) {
       state.panels = [];

@@ -81,4 +81,9 @@ a {
   margin-top: 4px;
   margin-bottom: 0;
 }
+
+.dimmed {
+  font-size: $font-size-small;
+  color: $color-text-dimmed;
+}
 </style>
