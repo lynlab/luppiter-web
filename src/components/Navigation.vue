@@ -8,7 +8,7 @@
       <ion-icon class="icon" name="contact"></ion-icon>
       <p class="description">로그아웃</p>
     </div>
-    <div class="item" @click="$emit('menu', 'api-key')" v-if="$store.state.accessToken">
+    <div class="item" @click="$store.commit('addPanel', 'api-key')" v-if="$store.state.accessToken">
       <ion-icon class="icon" name="key"></ion-icon>
       <p class="description">{{ $store.state.apiKey ? $store.state.apiKey.slice(0, 8) : 'API Keys' }}</p>
     </div>
@@ -16,25 +16,25 @@
     <template v-if="$store.state.accessToken">
       <hr>
 
-      <div class="item" @click="$emit('menu', 'storage')">
+      <div class="item" @click="$store.commit('addPanel', 'storage')">
         <ion-icon class="icon" name="filing"></ion-icon>
         <p class="description">Storage</p>
       </div>
 
       <hr>
 
-      <div class="item" @click="$emit('menu', 'certs')">
+      <div class="item" @click="$store.commit('addPanel', 'certs')">
         <ion-icon class="icon" name="lock"></ion-icon>
         <p class="description">Certs</p>
       </div>
 
       <hr>
 
-      <div class="item" @click="$emit('menu', 'hosting')">
+      <div class="item" @click="$store.commit('addPanel', 'hosting')">
         <ion-icon class="icon" name="globe"></ion-icon>
         <p class="description">Hosting</p>
       </div>
-      <div class="item" @click="$emit('menu', 'cloudcontainer')">
+      <div class="item" @click="$store.commit('addPanel', 'cloudcontainer')">
         <ion-icon class="icon" name="cube"></ion-icon>
         <p class="description">Container</p>
       </div>
@@ -54,6 +54,8 @@ export default {
       this.$router.push({ name: 'auth' });
     },
     onClickSignOut() {
+      this.$store.commit('removeAllPanels');
+
       this.$localStorage.remove('auth.accessToken');
       this.$localStorage.remove('auth.refreshToken');
       this.$localStorage.remove('auth.expireAt');
@@ -64,7 +66,7 @@ export default {
 
       this.isSignedIn = false;
 
-      this.$emit('signout');
+      this.$store.commit('signout');
       this.$notify({ group: 'luppiter', title: '로그아웃에 성공했습니다. 또 만나요!', type: 'success' });
     },
   },

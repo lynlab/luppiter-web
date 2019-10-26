@@ -10,6 +10,7 @@ export default new Vuex.Store({
     apiKey: null,
     accessToken: null,
     accessTokenExpireAt: -1,
+    panels: [],
   },
   mutations: {
     setApiKey(state, key) {
@@ -23,6 +24,17 @@ export default new Vuex.Store({
     },
     unsetAccessToken(state) {
       state.accessToken = null;
+    },
+    addPanel(state, key) {
+      if (state.panels.findIndex(k => k === key) === -1) {
+        state.panels.push(key);
+      }
+    },
+    removePanel(state, key) {
+      state.panels = state.panels.filter(k => k !== key);
+    },
+    removeAllPanels(state) {
+      state.panels = [];
     },
   },
 });

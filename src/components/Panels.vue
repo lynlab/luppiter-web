@@ -1,13 +1,13 @@
 <template>
   <div id="panels">
-    <div class="panel" v-for="panel in panels" v-bind:key="panel.name">
-      <ion-icon class="close-btn" name="close" @click="$emit('destroy', panel)"></ion-icon>
+    <div class="panel" v-for="panel in panels" v-bind:key="panel">
+      <ion-icon class="close-btn" name="close" @click="$store.commit('removePanel', panel)"></ion-icon>
 
-      <panel-api-key v-if="panel.name === 'api-key'" />
-      <panel-certs v-if="panel.name === 'certs'" />
-      <panel-cloudcontainer v-if="panel.name === 'cloudcontainer'" />
-      <panel-hosting v-if="panel.name === 'hosting'" />
-      <panel-storage v-if="panel.name === 'storage'" />
+      <panel-api-key v-if="panel === 'api-key'" />
+      <panel-certs v-if="panel === 'certs'" />
+      <panel-cloudcontainer v-if="panel === 'cloudcontainer'" />
+      <panel-hosting v-if="panel === 'hosting'" />
+      <panel-storage v-if="panel === 'storage'" />
     </div>
 
     <router-view />
@@ -23,15 +23,17 @@ import StoragePanel from '../views/panels/Storage.vue';
 
 export default {
   name: 'index',
+  computed: {
+    panels() {
+      return this.$store.state.panels;
+    },
+  },
   components: {
     'panel-api-key': ApiKeyPanel,
     'panel-certs': CertsPanel,
     'panel-cloudcontainer': CloudContainerPanel,
     'panel-hosting': HostingPanel,
     'panel-storage': StoragePanel,
-  },
-  props: {
-    panels: Array,
   },
 };
 </script>

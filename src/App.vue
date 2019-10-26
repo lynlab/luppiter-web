@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <navigation @menu="onMenu" @signout="onSignOut()" />
-    <panels :panels="panels" @destroy="onDestroy" />
+    <navigation @signout="onSignOut()" />
+    <panels />
 
     <notifications group="luppiter" />
   </div>
@@ -15,25 +15,6 @@ export default {
   components: {
     navigation: Navigation,
     panels: Panels,
-  },
-  data() {
-    return {
-      panels: [],
-    };
-  },
-  methods: {
-    onMenu(name) {
-      if (this.panels.findIndex(panel => panel.name === name) !== -1) {
-        return;
-      }
-      this.panels.push({ name });
-    },
-    onSignOut() {
-      this.panels = [];
-    },
-    onDestroy(panel) {
-      this.panels = this.panels.filter(p => p.name !== panel.name);
-    },
   },
   created() {
     const apiKey = this.$localStorage.get('luppiter.apiKey');
