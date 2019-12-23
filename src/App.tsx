@@ -1,10 +1,9 @@
 import React from 'react';
-import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello, world!</h1>
+    <div className="w-screen h-screen bg-gray-900 text-gray-000 font-sans">
+      <h1 className="text-4xl">Hello, world!</h1>
     </div>
   );
 }
