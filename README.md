@@ -1,15 +1,3 @@
-# LYnLab Luppiter Web
+# Luppiter Console
 
-## Development
-
-```
-yarn install
-yarn serve
-```
-
-## Deployment
-
-```
-# Build static files.
-yarn build
-```
+> Web console for Luppiter services.
