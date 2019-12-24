@@ -125,6 +125,12 @@ module.exports = {
           900: '#a61e4d',
         },
       },
+      spacing: {
+        96: '24rem',
+      },
+      minWidth: {
+        96: '24rem',
+      },
       fontFamily: {
         sans: ['"Noto Sans KR"', ...defaultTheme.fontFamily.sans],
       },

@@ -1,9 +1,13 @@
 import React from 'react';
 
+import NavBar from './components/navbar/NavBar';
+import TabsWrapper from './components/tabs/TabsWrapper';
+
 function App() {
   return (
-    <div className="w-screen h-screen bg-gray-900 text-gray-000 font-sans">
-      <h1 className="text-4xl">Hello, world!</h1>
+    <div className="w-screen h-screen flex bg-gray-800 text-gray-000 font-sans">
+      <NavBar />
+      <TabsWrapper />
     </div>
   );
 }
