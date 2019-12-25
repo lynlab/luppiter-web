@@ -1,12 +1,14 @@
-import React, {MouseEvent} from 'react';
-import {connect, ConnectedProps} from 'react-redux';
-import {mdiCubeOutline, mdiEarth, mdiFile, mdiKeyVariant, mdiLock, mdiSecurity} from '@mdi/js/commonjs/mdi';
+import React from 'react';
+import { connect, ConnectedProps } from 'react-redux';
+import {
+  mdiCubeOutline, mdiEarth, mdiFile, mdiKeyVariant, mdiLock, mdiSecurity,
+} from '@mdi/js/commonjs/mdi';
 
 import NavButton from './NavButton';
 import NavDivider from './NavDivider';
-import {TabTypes} from '../../models/tab';
-import {RootState} from '../../store';
-import {addTab} from "../../store/tab-manager";
+import { TabTypes } from '../../models/tab';
+import { RootState } from '../../store';
+import { addTab } from '../../store/tab-manager';
 
 const mapState = (state: RootState) => ({ tabManager: state.tabManager });
 const connector = connect(mapState, { addTab });
@@ -18,7 +20,7 @@ class NavBar extends React.Component<ContainerProps> {
     this.props.addTab({ tabType });
   };
 
-  handleMoveRoute = (_: MouseEvent) => {};
+  handleMoveRoute = () => {};
 
   render() {
     return (

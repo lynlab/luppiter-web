@@ -1,3 +1,23 @@
 {
-  "extends": ["react-app"]
+  "root": true,
+  "env": {
+    "node": true
+  },
+  "extends": [
+    "react-app",
+    "airbnb-base",
+    "airbnb/rules/react"
+  ],
+  "rules": {
+    "import/prefer-default-export": "off",
+    "react/jsx-filename-extension": "off",
+    "react/destructuring-assignment": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  }
 }

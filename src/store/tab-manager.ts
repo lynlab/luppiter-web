@@ -1,6 +1,6 @@
-import {Tab} from '../models/tab';
+import { Tab } from '../models/tab';
 
-/// States
+// / States
 export interface TabsState {
   tabs: Tab[];
 }
@@ -25,7 +25,7 @@ interface RemoveTabAction {
 
 export type TabsActionTypes = AddTabAction | RemoveTabAction;
 
-/// Actions
+// / Actions
 export function addTab(newTab: Tab): AddTabAction {
   return { type: ADD_TAB, tab: newTab };
 }
@@ -34,7 +34,7 @@ export function removeTab(tabToRemove: Tab): RemoveTabAction {
   return { type: REMOVE_TAB, tab: tabToRemove };
 }
 
-/// Reducer
+// / Reducer
 export function tabsReducer(state: TabsState = initialState, action: TabsActionTypes): TabsState {
   switch (action.type) {
     case ADD_TAB:
