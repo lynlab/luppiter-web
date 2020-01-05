@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   mdiCubeOutline, mdiEarth, mdiFile, mdiKeyVariant, mdiLock, mdiSecurity,
 } from '@mdi/js/commonjs/mdi';
@@ -20,13 +21,13 @@ class NavBar extends React.Component<ContainerProps> {
     this.props.addTab({ tabType });
   };
 
-  handleMoveRoute = () => {};
-
   render() {
     return (
       <div className="w-20 h-screen py-2 bg-gray-900 text-center">
-        <NavButton text="로그인" icon={mdiLock} onClick={this.handleMoveRoute} />
-        <NavButton text="API Keys" icon={mdiKeyVariant} onClick={this.handleMoveRoute} />
+        <Link to="/signin">
+          <NavButton text="로그인" icon={mdiLock} />
+        </Link>
+        <NavButton text="API Keys" icon={mdiKeyVariant} onClick={() => this.handleAddTab(TabTypes.ApiKey)} />
 
         <NavDivider />
 

@@ -4,7 +4,7 @@ import React, { MouseEvent } from 'react';
 type NavButtonProps = {
   text: string,
   icon: string,
-  onClick: (e: MouseEvent) => void,
+  onClick?: (e: MouseEvent) => void,
 }
 
 export default (props: NavButtonProps) => {

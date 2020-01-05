@@ -3,6 +3,7 @@ export interface Tab {
 }
 
 export enum TabTypes {
+  ApiKey = 'ApiKey',
   Storage = 'Storage',
   Certs = 'Certs',
   Hosting = 'Hosting',

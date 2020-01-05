@@ -131,6 +131,9 @@ module.exports = {
       minWidth: {
         96: '24rem',
       },
+      maxWidth: {
+        128: '32rem',
+      },
       fontFamily: {
         sans: ['"Noto Sans KR"', ...defaultTheme.fontFamily.sans],
       },
