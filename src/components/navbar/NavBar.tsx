@@ -7,40 +7,66 @@ import {
 
 import NavButton from './NavButton';
 import NavDivider from './NavDivider';
+import constants from '../../constants';
 import { TabTypes } from '../../models/tab';
+import AuthService from '../../services/auth/auth';
 import { RootState } from '../../store';
 import { addTab } from '../../store/tab-manager';
 
 const mapState = (state: RootState) => ({ tabManager: state.tabManager });
 const connector = connect(mapState, { addTab });
 
-type ContainerProps = ConnectedProps<typeof connector>;
+type NavBarProps = ConnectedProps<typeof connector>;
+type NavBarStates = { signedIn: boolean };
 
-class NavBar extends React.Component<ContainerProps> {
+class NavBar extends React.Component<NavBarProps, NavBarStates> {
+  constructor(props: NavBarProps) {
+    super(props);
+    this.state = { signedIn: AuthService.hasSignedIn(constants.CONSOLE_APP_ID) };
+  }
+
+
   handleAddTab = (tabType: TabTypes) => {
     this.props.addTab({ tabType });
+  };
+
+  handleSignOut = () => {
+    AuthService.signOut(constants.CONSOLE_APP_ID);
+    this.setState({ signedIn: false });
   };
 
   render() {
     return (
       <div className="w-20 h-screen py-2 bg-gray-900 text-center">
-        <Link to="/signin">
-          <NavButton text="로그인" icon={mdiLock} />
-        </Link>
-        <NavButton text="API Keys" icon={mdiKeyVariant} onClick={() => this.handleAddTab(TabTypes.ApiKey)} />
+        {
+          this.state.signedIn
+            ? (
+              <div>
+                <NavButton text="Sign Out" icon={mdiLock} onClick={this.handleSignOut} />
+                <NavButton text="API Keys" icon={mdiKeyVariant} onClick={() => this.handleAddTab(TabTypes.ApiKey)} />
 
-        <NavDivider />
+                <NavDivider />
 
-        <NavButton text="Storage" icon={mdiFile} onClick={() => this.handleAddTab(TabTypes.Storage)} />
+                <NavButton text="Storage" icon={mdiFile} onClick={() => this.handleAddTab(TabTypes.Storage)} />
 
-        <NavDivider />
+                <NavDivider />
 
-        <NavButton text="Certs" icon={mdiSecurity} onClick={() => this.handleAddTab(TabTypes.Certs)} />
+                <NavButton text="Certs" icon={mdiSecurity} onClick={() => this.handleAddTab(TabTypes.Certs)} />
 
-        <NavDivider />
+                <NavDivider />
 
-        <NavButton text="Hosting" icon={mdiEarth} onClick={() => this.handleAddTab(TabTypes.Hosting)} />
-        <NavButton text="Container" icon={mdiCubeOutline} onClick={() => this.handleAddTab(TabTypes.CloudContainer)} />
+                <NavButton text="Hosting" icon={mdiEarth} onClick={() => this.handleAddTab(TabTypes.Hosting)} />
+                <NavButton text="Container" icon={mdiCubeOutline} onClick={() => this.handleAddTab(TabTypes.CloudContainer)} />
+              </div>
+            )
+            : (
+              <div>
+                <Link to="/signin">
+                  <NavButton text="Sign In" icon={mdiLock} />
+                </Link>
+              </div>
+            )
+        }
       </div>
     );
   }

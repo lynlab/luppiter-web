@@ -17,7 +17,7 @@ export default class SignIn extends React.Component<SignInProps> {
     this.props.onSignIn(idToken);
 
     try {
-      const apiToken = await AuthService.createApiToken(idToken, this.props.app.appId);
+      const apiToken = await AuthService.signIn(this.props.app.appId, idToken);
       this.props.onSuccess(apiToken);
     } catch (e) {
       if (e instanceof UnauthorizedError) {

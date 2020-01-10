@@ -1,6 +1,8 @@
 import fetch, { Response } from 'node-fetch';
 import jwt from 'jsonwebtoken';
 
+import constants from '../../constants';
+
 export type Application = {
   appId: string;
   name: string;
@@ -56,18 +58,6 @@ export default class AuthService {
     };
   }
 
-  static async getAppAuthorization(appId: string, apiToken: ApiToken): Promise<boolean> {
-    const res = await AuthService.get<GetAppAuthorizationResponse>(`/v1/applications/${appId}/authorization`, apiToken);
-    return res.authorized;
-  }
-
-  static async createApiToken(idToken: string, appId: string): Promise<ApiToken> {
-    const res = await AuthService.post<CreateApiTokenResponse>('/v1/api_tokens/google', { id_token: idToken, app_id: appId });
-    return {
-      accessKey: res.access_key, secretKey: res.secret_key, expireAt: new Date(res.expire_at),
-    };
-  }
-
   static async createAccount(idToken: string, username: string): Promise<Account> {
     const res = await AuthService.post<CreateAccountResponse>('/v1/accounts/google', { id_token: idToken, username });
     return {
@@ -75,8 +65,45 @@ export default class AuthService {
     };
   }
 
-  static async createAppAuthorization(appId: string, apiToken: ApiToken): Promise<void> {
+  static async getAppAuthorization(appId: string): Promise<boolean> {
+    const apiToken = this.getIssuedApiToken(constants.CONSOLE_APP_ID);
+    const res = await AuthService.get<GetAppAuthorizationResponse>(`/v1/applications/${appId}/authorization`, apiToken);
+    return res.authorized;
+  }
+
+  static async createAppAuthorization(appId: string): Promise<void> {
+    const apiToken = this.getIssuedApiToken(constants.CONSOLE_APP_ID);
     await AuthService.post(`/v1/applications/${appId}/authorization`, null, apiToken);
+  }
+
+  static async signIn(appId: string, idToken: string): Promise<ApiToken> {
+    const res = await AuthService.post<CreateApiTokenResponse>('/v1/api_tokens/google', { id_token: idToken, app_id: appId });
+    const apiToken = {
+      accessKey: res.access_key, secretKey: res.secret_key, expireAt: new Date(res.expire_at),
+    };
+    localStorage.setItem(`luppiter.auth.${appId}`, JSON.stringify(apiToken));
+
+    return apiToken;
+  }
+
+  static signOut(appId: string) {
+    localStorage.removeItem(`luppiter.auth.${appId}`);
+  }
+
+  static hasSignedIn(appId: string): boolean {
+    return !!localStorage.getItem(`luppiter.auth.${appId}`);
+  }
+
+  static getIssuedApiToken(appId: string): ApiToken {
+    const apiToken = localStorage.getItem(`luppiter.auth.${appId}`);
+    if (!apiToken) {
+      throw new UnauthorizedError();
+    }
+
+    const parsed = JSON.parse(apiToken);
+    return {
+      accessKey: parsed.accessKey, secretKey: parsed.secretKey, expireAt: new Date(parsed.expireAt)
+    };
   }
 
   private static async get<T>(path: string, apiToken?: ApiToken): Promise<T> {

@@ -3,7 +3,7 @@ import BeatLoader from 'react-spinners/BeatLoader';
 import qs from 'query-string';
 
 import Constants from '../../constants';
-import AuthService, { ApiToken, Application } from '../../services/auth/auth';
+import AuthService, { Application } from '../../services/auth/auth';
 import AuthorizeApp from './AuthorizeApp';
 import SignIn from './SignIn';
 import CreateAccount from './CreateAccount';
@@ -80,18 +80,16 @@ interface SignInProps {
 
 interface SignInState {
   step: SignInStep;
-  apiToken?: ApiToken;
   idToken: string;
 }
 
-export class SignInContainer extends React.Component<SignInProps, SignInState> {
+class SignInContainer extends React.Component<SignInProps, SignInState> {
   constructor(props: any) {
     super(props);
     this.state = { step: SignInStep.SIGN_IN, idToken: '' };
   }
 
-  onSignInSuccess = async (apiToken: ApiToken) => {
-    this.setState({ apiToken });
+  onSignInSuccess = async () => {
     if (await this.checkAppAuthorized()) {
       this.onFinish();
     } else {
@@ -100,19 +98,18 @@ export class SignInContainer extends React.Component<SignInProps, SignInState> {
   };
 
   onAppAuthorize = async () => {
-    await AuthService.createAppAuthorization(this.props.app.appId, this.state.apiToken!);
+    await AuthService.createAppAuthorization(this.props.app.appId);
     this.onFinish();
   };
 
   onFinish = () => {
-    const { apiToken } = this.state;
+    const apiToken = AuthService.getIssuedApiToken(this.props.app.appId);
     localStorage.setItem(`luppiter.auth.${this.props.app.appId}`, JSON.stringify(apiToken));
-    window.location.href = `${this.props.redirectUrl}?access_key=${apiToken!.accessKey}&secret_key=${apiToken!.secretKey}&expire_at=${apiToken!.expireAt.getTime()}`;
+    window.location.href = `${this.props.redirectUrl}?access_key=${apiToken.accessKey}&secret_key=${apiToken.secretKey}&expire_at=${apiToken.expireAt.getTime()}`;
   };
 
-  checkAppAuthorized = async (): Promise<boolean> => AuthService.getAppAuthorization(
-    this.props.app.appId, this.state.apiToken!,
-  );
+  checkAppAuthorized =
+    async (): Promise<boolean> => AuthService.getAppAuthorization(this.props.app.appId);
 
   componentByState = () => {
     switch (this.state.step) {
