@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from 'react';
 
 import AuthService from '../../services/auth/auth';
+import { FilledButton } from '../../components/elements/FilledButton';
 
 type CreateAccountProps = {
   idToken: string;
@@ -34,7 +35,7 @@ export default class CreateAccount
           placeholder="Username"
           onChange={this.handleUsernameChange}
         />
-        <button className="w-full mb-4 px-4 py-2 rounded bg-purple-700" type="button" onClick={this.createAccount}>Register</button>
+        <FilledButton className="w-full mb-4" text="Register" onClick={this.createAccount} />
       </div>
     );
   }

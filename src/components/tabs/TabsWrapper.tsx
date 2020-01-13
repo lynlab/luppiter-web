@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import Icon from '@mdi/react';
 import { mdiClose } from '@mdi/js';
+
+import { Applications } from './applications/Index';
 
 import { TabTypes } from '../../models/tab';
 import { RootState } from '../../store';
@@ -15,6 +17,13 @@ type ContainerProps = ConnectedProps<typeof connector>;
 class TabsWrapper extends React.Component<ContainerProps> {
   handleRemoveTab = (tabType: TabTypes) => {
     this.props.removeTab({ tabType });
+  };
+
+  getComponentByType = (tabType: TabTypes): ReactElement | null => {
+    switch (tabType) {
+      case TabTypes.Applications: return <Applications />;
+      default: return null;
+    }
   };
 
   render() {
@@ -33,6 +42,8 @@ class TabsWrapper extends React.Component<ContainerProps> {
 
             {/* Divider */}
             <div className="border-b border-gray-800" />
+
+            <div className="p-3">{this.getComponentByType(tab.tabType)}</div>
           </div>
         ))}
       </div>

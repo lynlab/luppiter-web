@@ -58,6 +58,23 @@ export default class AuthService {
     };
   }
 
+  static async listApplications(): Promise<Application[]> {
+    const apiToken = this.getIssuedApiToken(constants.CONSOLE_APP_ID);
+    const res = await AuthService.get<GetApplicationResponse[]>('/v1/applications', apiToken);
+    return res.length === 0 ? [] : res.map((i) => ({
+      appId: i.app_id, name: i.name, createdAt: new Date(i.created_at), owner: i.owner,
+    }));
+  }
+
+  static async createApplication(name: string, redirectUrl?: string): Promise<Application> {
+    const apiToken = this.getIssuedApiToken(constants.CONSOLE_APP_ID);
+    const body = { name, redirectUrl };
+    const res = await AuthService.post<GetApplicationResponse>('/v1/applications', body, apiToken);
+    return {
+      appId: res.app_id, name: res.name, createdAt: new Date(res.created_at), owner: res.owner,
+    };
+  }
+
   static async createAccount(idToken: string, username: string): Promise<Account> {
     const res = await AuthService.post<CreateAccountResponse>('/v1/accounts/google', { id_token: idToken, username });
     return {
