@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import Icon from '@mdi/react';
 import { mdiClose } from '@mdi/js';
 
-import { Applications } from './applications/Index';
+import { Applications } from './Applications';
 
 import { TabTypes } from '../../models/tab';
 import { RootState } from '../../store';
